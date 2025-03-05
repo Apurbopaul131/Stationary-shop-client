@@ -1,4 +1,12 @@
-const productCategories = [
+export const productCategories = [
+  "Writing",
+  "Office Supplies",
+  "Art Supplies",
+  "Educational",
+  "Technology",
+];
+export const productCategoriesAllProducts = [
+  "All",
   "Writing",
   "Office Supplies",
   "Art Supplies",

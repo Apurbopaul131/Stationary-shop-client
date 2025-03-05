@@ -1,4 +1,5 @@
 import "@ant-design/v5-patch-for-react-19";
+import { ConfigProvider } from "antd";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
@@ -13,7 +14,16 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router}></RouterProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              // Seed Token
+              colorPrimary: "#ff4d4f",
+            },
+          }}
+        >
+          <RouterProvider router={router}></RouterProvider>
+        </ConfigProvider>
       </PersistGate>
       <Toaster></Toaster>
     </Provider>

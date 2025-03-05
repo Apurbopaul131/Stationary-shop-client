@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Flex, Space } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import PcInput from "../components/form/pcInput";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
+import { userLoginValidationSchema } from "../schemas/user.schema";
 import "../styles/toast.css";
 import handleJwtTokenDecode from "../uitls/jwtDecode";
 const Login = () => {
@@ -63,6 +65,7 @@ const Login = () => {
     <Flex justify="center" align="center" style={{ minHeight: "100vh" }}>
       <PcForm
         onSubmit={handleOnSubmit}
+        resolver={zodResolver(userLoginValidationSchema)}
         style={{
           minWidth: "400px",
           padding: "1rem",

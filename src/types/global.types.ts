@@ -64,6 +64,7 @@ export type TUserRes = {
   _id: string;
   email: string;
   name: string;
+  image: string;
   role: "user" | "admin";
   isBlocked: boolean;
 };

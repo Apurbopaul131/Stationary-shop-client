@@ -1,7 +1,7 @@
 import { Table, TableColumnsType } from "antd";
 import { useGetMeOrdersQuery } from "../../redux/features/user/viewUserOrdersApi";
+import "../../styles/customTable.css";
 import { TOrder } from "../../types";
-
 //type for handle table
 type TTableData = Pick<TOrder, "product" | "status" | "email"> & {
   key: string;
@@ -44,6 +44,7 @@ const ViewOrders = () => {
     }));
   return (
     <Table
+      className="custom-table"
       loading={isFetching && isLoading}
       columns={columns}
       dataSource={orderDataSource}

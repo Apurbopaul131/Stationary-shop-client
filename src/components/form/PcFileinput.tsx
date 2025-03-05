@@ -11,10 +11,14 @@ const PcFileinput = ({ name, label }: TFileinputprops) => {
     <Controller
       name={name}
       control={control}
-      render={({ field: { onChange, value }, fieldState: { error } }) => {
+      render={({
+        field: { onChange, value, ...field },
+        fieldState: { error },
+      }) => {
         return (
           <Form.Item label={label}>
             <Input
+              {...field}
               type="file"
               onChange={(e) => onChange(e.target.files?.[0])}
               value={value?.fileName}

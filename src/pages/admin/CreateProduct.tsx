@@ -14,13 +14,14 @@ import {
   productStockOptions,
 } from "../../constants/createproduct.constants";
 import { useCreateProductMutation } from "../../redux/features/admin/productManagementApi";
-import { createProductValidationSchmea } from "../../schemas/createProduct.schema";
+import { createProductValidationSchmea } from "../../schemas/product.schema";
 import { TProduct, TResponse } from "../../types";
 import { uploadImageToCloudinary } from "../../uitls/uploadImage";
 
 const CreateProduct = () => {
   const [createProduct] = useCreateProductMutation();
   const createProductOnSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     const toastId = toast.loading("Creating Product...", {
       style: {
         padding: "10px",
@@ -35,9 +36,7 @@ const CreateProduct = () => {
       brand: data?.brand,
       price: /\./.test(data?.price) ? eval(data?.price) : Number(data?.price),
       category: data?.category,
-      image: imageUrl
-        ? imageUrl
-        : "https://res.cloudinary.com/dvqqxighm/image/upload/v1740296407/y1qcncmveqgfavbvo5rn.jpg",
+      image: imageUrl,
       description: data?.description,
       quantity: Number(data?.quantity),
       inStock: data?.inStock,

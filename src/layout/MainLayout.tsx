@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/shered/Navbar";
 
 const MainLayout = () => {
   return (
     <div>
-      <h1>This is navbar</h1>
+      <Navbar></Navbar>
       <Outlet />
     </div>
   );

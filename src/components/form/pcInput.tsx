@@ -5,8 +5,9 @@ type TPcInput = {
   type: string;
   name: string;
   label?: string;
+  placeholder?: string;
 };
-const PcInput = ({ type, name, label }: TPcInput) => {
+const PcInput = ({ type, name, label, placeholder }: TPcInput) => {
   const { control } = useFormContext();
   return (
     <>
@@ -15,7 +16,12 @@ const PcInput = ({ type, name, label }: TPcInput) => {
         name={name}
         render={({ field, fieldState: { error } }) => (
           <Form.Item label={label}>
-            <Input size="large" type={type} {...field} />
+            <Input
+              placeholder={placeholder}
+              size="large"
+              type={type}
+              {...field}
+            />
             {error && <span style={{ color: "red" }}>{error.message}</span>}
           </Form.Item>
         )}

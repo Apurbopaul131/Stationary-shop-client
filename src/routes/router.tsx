@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ProductCart from "../components/ui/ProductCart";
 import DashboardLayout from "../layout/DashboardLayout";
 import MainLayout from "../layout/MainLayout";
 import ProtectedRoute from "../layout/ProtectedRoute";
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "products/:productId",
         element: <ProductDetails />,
+      },
+      {
+        path: "products/:productId/cart",
+        element: <ProductCart />,
       },
     ],
   },

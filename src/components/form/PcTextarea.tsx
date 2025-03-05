@@ -6,8 +6,9 @@ type TPcTextarea = {
   name: string;
   label?: string;
   rows: number;
+  placeholer?: string;
 };
-const PcTextarea = ({ name, label, rows }: TPcTextarea) => {
+const PcTextarea = ({ name, label, rows, placeholer }: TPcTextarea) => {
   const { control } = useFormContext();
   return (
     <>
@@ -16,7 +17,12 @@ const PcTextarea = ({ name, label, rows }: TPcTextarea) => {
         name={name}
         render={({ field, fieldState: { error } }) => (
           <Form.Item label={label}>
-            <TextArea size="large" rows={rows} {...field} />
+            <TextArea
+              placeholder={placeholer}
+              size="large"
+              rows={rows}
+              {...field}
+            />
             {error && <span style={{ color: "red" }}>{error.message}</span>}
           </Form.Item>
         )}

@@ -1,3 +1,4 @@
+import { LogoutOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import { Outlet } from "react-router-dom";
 import paperCartLogo from "../assets/images/shop-logo.png";
@@ -75,6 +76,7 @@ const DashboardLayout = () => {
             variant="solid"
           >
             Logout
+            <LogoutOutlined />
           </Button>
         </Header>
         <Content style={{ margin: "10px 10px 0" }}>

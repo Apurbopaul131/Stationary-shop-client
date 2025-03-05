@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Col, Row } from "antd";
+
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import PcForm from "../../components/form/PcForm";
 import PcInput from "../../components/form/pcInput";
 import PcSelactInput from "../../components/form/PcSelectInput";
 import PcTextarea from "../../components/form/PcTextarea";
+import LoadingSpinner from "../../components/shered/LoadingSpinner";
 import {
   productCategoriesOptions,
   productStockOptions,
@@ -16,14 +19,22 @@ import {
   useGetProductQuery,
   useUpdateProductMutation,
 } from "../../redux/features/admin/productManagementApi";
+import { updateProductValidationSchmea } from "../../schemas/product.schema";
 import { TProduct, TResponse } from "../../types";
 
 const UpdateProduct = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
-  const { data: product } = useGetProductQuery(productId);
+  const {
+    data: product,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetProductQuery(productId);
+
   const [updateProduct] = useUpdateProductMutation();
   const updateProductOnsubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Creating Product...", {
+    const toastId = toast.loading("updating Product...", {
       style: {
         padding: "10px",
         borderRadius: "8px",
@@ -31,15 +42,19 @@ const UpdateProduct = () => {
       },
       position: "top-center",
     });
+    const { price, quantity, ...remainingData } = data;
     const updatedDataWithId = {
       productId,
-      ...data,
+      price: /\./.test(data?.price) ? eval(data?.price) : Number(data?.price),
+      quantity: Number(quantity),
+      ...remainingData,
     };
     try {
       //call the mutaion function
       const result = (await updateProduct(
         updatedDataWithId
       )) as TResponse<TProduct>;
+      refetch();
       //show product already exist error!
       if (result?.error) {
         toast.error(result?.error?.data?.message, {
@@ -65,6 +80,7 @@ const UpdateProduct = () => {
           id: toastId,
           duration: 2000,
         });
+        navigate("/admin/products");
       }
     } catch (err: any) {
       toast.error("Product creation failed!", {
@@ -86,15 +102,19 @@ const UpdateProduct = () => {
     description: product?.data?.description,
     image: product?.data?.image,
     inStock: product?.data?.inStock,
-    price: product?.data?.price,
-    quantity: product?.data?.quantity,
+    price: String(product?.data?.price),
+    quantity: String(product?.data?.quantity),
   };
+  if (isLoading && isFetching) {
+    return <LoadingSpinner />;
+  }
   return (
     <Row justify="center">
       <Col xs={{ span: 24 }} sm={{ span: 12 }}>
-        {product?.data && (
+        {product && (
           <PcForm
             onSubmit={updateProductOnsubmit}
+            resolver={zodResolver(updateProductValidationSchmea)}
             defaultValues={productDefaultValues}
           >
             <PcInput type="text" name="name" label="Title:" />
@@ -116,7 +136,7 @@ const UpdateProduct = () => {
               placeholder="Selact an option:"
             />
             <Button htmlType="submit" color="danger" variant="solid">
-              Create Product
+              Update Product
             </Button>
           </PcForm>
         )}

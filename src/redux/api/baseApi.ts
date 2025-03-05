@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).login.token;
+    const { token } = (getState() as RootState).login;
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -33,7 +33,6 @@ const baseQueryWithReauth: BaseQueryFn<
     TProduct | TOrder
   >;
   if (result?.error?.status === 404) {
-    console.log("base api error");
     toast.error(result?.error?.data?.message, {
       position: "top-center",
       style: {

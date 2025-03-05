@@ -1,0 +1,40 @@
+.best-offers {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.coupon-card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.coupon-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left p,
+.right p {
+  font-size: 1.2rem;
+}
+
+.yellow {
+  background-color: #faad14;
+}
+
+.pink {
+  background-color: #ff4d4f;
+}
+@media only screen and (min-width: 768px) {
+  .yellow {
+    background: #faad14 url("../../assets/images/cupon-devider.png") no-repeat
+      center;
+  }
+
+  .pink {
+    background: #ff4d4f url("../../assets/images/cupon-devider.png") no-repeat
+      center;
+  }
+}

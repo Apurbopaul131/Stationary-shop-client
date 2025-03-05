@@ -1,0 +1,53 @@
+.jacket-card-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.jacket-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.jacket-image {
+  width: auto;
+  height: 400px;
+  border-radius: 20px;
+  background-color: rgb(212, 209, 209, 0.4);
+  margin: 10px;
+  padding: 10px;
+  object-fit: cover;
+}
+
+.card-body {
+  text-align: center;
+  padding: 16px;
+}
+
+.card-footer {
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #ffbf00;
+}
+
+.buy-now {
+  background-color: #52c41a;
+  border: none;
+}
+
+.buy-now:hover {
+  background-color: #389e0d;
+}

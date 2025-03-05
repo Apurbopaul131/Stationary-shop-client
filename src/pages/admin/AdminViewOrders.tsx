@@ -10,6 +10,7 @@ import {
   useCancleOrderMutation,
   useGetAllOrderQuery,
 } from "../../redux/features/admin/orderManagementApi";
+import "../../styles/customTable.css";
 import { TOrder, TResponse } from "../../types";
 
 //type for handle table
@@ -20,6 +21,9 @@ type TTableData = Pick<TOrder, "product" | "status" | "email"> & {
 const AdminViewOrders = () => {
   //state for handle modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
   //Get all orders query hook in redux
   const {
     data: orders,
@@ -83,50 +87,55 @@ const AdminViewOrders = () => {
     }
   };
   //handle show confirm delete modal
-  const showModal = () => {
+  const showModal = (orderId: string) => {
+    setSelectedProductId(orderId);
     setIsModalOpen(true);
   };
   //handle actual product delete mutaion
-  const handleOk = async (orderId: string) => {
-    setIsModalOpen(false);
-    const toastId = toast.loading("Deleteing product...", {
-      style: {
-        padding: "10px",
-        borderRadius: "8px",
-        color: "yellowgreen",
-      },
-      position: "top-center",
-    });
-    try {
-      const result = await cancleOrder(orderId);
-      if (result?.data) {
-        toast.success(result?.data?.message, {
-          style: {
-            padding: "10px",
-            borderRadius: "8px",
-            color: "green",
-          },
-          position: "top-center",
-          id: toastId,
-          duration: 2000,
-        });
-      }
-    } catch (err: any) {
-      toast.error("Faild to delete product...", {
-        id: toastId,
-        duration: 2000,
+  const handleOk = async () => {
+    if (selectedProductId) {
+      setIsModalOpen(false);
+      const toastId = toast.loading("Deleteing product...", {
         style: {
           padding: "10px",
           borderRadius: "8px",
-          color: "red",
+          color: "yellowgreen",
         },
         position: "top-center",
       });
+      try {
+        const result = await cancleOrder(selectedProductId);
+        if (result?.data) {
+          toast.success(result?.data?.message, {
+            style: {
+              padding: "10px",
+              borderRadius: "8px",
+              color: "green",
+            },
+            position: "top-center",
+            id: toastId,
+            duration: 2000,
+          });
+        }
+        setSelectedProductId(null);
+      } catch (err: any) {
+        toast.error("Faild to delete product...", {
+          id: toastId,
+          duration: 2000,
+          style: {
+            padding: "10px",
+            borderRadius: "8px",
+            color: "red",
+          },
+          position: "top-center",
+        });
+      }
     }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setSelectedProductId(null);
   };
   const columns: TableColumnsType<TTableData> = [
     {
@@ -153,13 +162,17 @@ const AdminViewOrders = () => {
             Accept Order
           </Button>
           <>
-            <Button onClick={showModal} color="danger" variant="solid">
+            <Button
+              onClick={() => showModal(record?.key)}
+              color="danger"
+              variant="solid"
+            >
               Cancle Order
             </Button>
             <Modal
               title="Are you want to cancle order?"
               open={isModalOpen}
-              onOk={() => handleOk(record?.key)}
+              onOk={handleOk}
               onCancel={handleCancel}
             >
               <p>If you are sure then press ok</p>
@@ -180,6 +193,8 @@ const AdminViewOrders = () => {
   return (
     <div>
       <Table
+        className="custom-table"
+        style={{ overflowX: "scroll" }}
         loading={isFetching && isLoading}
         columns={columns}
         dataSource={orderDataSource}
