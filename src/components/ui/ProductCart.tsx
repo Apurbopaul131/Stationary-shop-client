@@ -2,6 +2,8 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { useCreateOrderMutation } from "../../redux/features/admin/orderManagementApi";
 import { useGetProductQuery } from "../../redux/features/admin/productManagementApi";
 import LoadingSpinner from "../shered/LoadingSpinner";
 
@@ -14,14 +16,37 @@ const ProductCart = () => {
     isLoading,
     isFetching,
   } = useGetProductQuery(productId);
+  const [createOrder] = useCreateOrderMutation();
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
-    setTotalPrice(product?.data?.price * quantity);
+    const productTotalPrice = product?.data?.price * quantity;
+    setTotalPrice(productTotalPrice);
   }, [product?.data?.price, quantity]);
-  console.log("price", product?.data.price);
-  console.log("quantity:", quantity);
-  console.log("total Price", totalPrice);
+  const handleProcedCheckout = async () => {
+    toast.loading("processing...", {
+      style: {
+        padding: "10px",
+        borderRadius: "8px",
+        color: "yellowgreen",
+      },
+      position: "top-center",
+    });
+    const order = {
+      product: product?.data?._id,
+      quantity: quantity,
+    };
+    try {
+      const orderedUrl = await createOrder(order);
+      if (orderedUrl?.data?.data) {
+        setTimeout(() => {
+          window.location.href = orderedUrl?.data?.data;
+        }, 1000);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   if (isLoading || isFetching) {
     return <LoadingSpinner />;
   }
@@ -96,7 +121,7 @@ const ProductCart = () => {
               }}
             >
               <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>Total:</p>
-              <p style={{ fontSize: "1.2rem" }}>${totalPrice}</p>
+              <p style={{ fontSize: "1.2rem" }}>${totalPrice.toFixed(2)}</p>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <Link to={`/products/${productId}`}>
@@ -104,7 +129,11 @@ const ProductCart = () => {
                   Cancle
                 </Button>
               </Link>
-              <Button color="danger" variant="solid">
+              <Button
+                onClick={() => handleProcedCheckout()}
+                color="danger"
+                variant="solid"
+              >
                 Proced Checkout
               </Button>
             </div>

@@ -10,14 +10,16 @@ const ProductCard = ({
   price,
   image,
 }: Pick<TProduct, "_id" | "name" | "description" | "price" | "image">) => {
+  console.log(name.length);
+  console.log(description.length);
   return (
-    <Col sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+    <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
       <Card style={{ borderRadius: "10px", backgroundColor: "#FEEAE9" }}>
         <img
           src={image}
           style={{
             width: "100%",
-            height: "400px",
+            height: "250px",
             borderRadius: "20px",
             backgroundColor: "rgb(212, 209, 209,0.4)",
             padding: "20px ",
@@ -25,8 +27,14 @@ const ProductCard = ({
           alt="Card Image"
         />
         <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-          <Title level={3}>{name}</Title>
-          <p style={{ fontSize: "1.2rem" }}>{description}</p>
+          <Title level={3}>
+            {name.length > 19 ? `${name.slice(0, 19)}...` : name}
+          </Title>
+          <p style={{ fontSize: "1.2rem" }}>
+            {description.length > 30
+              ? `${description.slice(0, 30)}...`
+              : description}
+          </p>
         </div>
         <div
           style={{

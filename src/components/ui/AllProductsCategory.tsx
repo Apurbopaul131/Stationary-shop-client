@@ -1,14 +1,23 @@
-import { Row } from "antd";
+import { Pagination, Row } from "antd";
 import { TProduct } from "../../types";
 import ProductCard from "../shered/ProductCard";
 
-const AllProductsCategory = ({ products }: { products: TProduct[] }) => {
+const AllProductsCategory = ({
+  products,
+  meta,
+  setPage,
+  page,
+}: {
+  products: TProduct[];
+  meta: { page: number; limit: number; total: number; totalPage: number };
+  setPage: (value: number) => void;
+  page: number;
+}) => {
   return (
-    <Row gutter={[16, 16]}>
-      {products &&
-        products
-          .slice(0, 3)
-          .map(({ _id, name, image, description, price }) => (
+    <div>
+      <Row gutter={[16, 16]}>
+        {products &&
+          products.map(({ _id, name, image, description, price }) => (
             <ProductCard
               key={_id}
               _id={_id}
@@ -18,7 +27,16 @@ const AllProductsCategory = ({ products }: { products: TProduct[] }) => {
               price={price}
             ></ProductCard>
           ))}
-    </Row>
+      </Row>
+      <Pagination
+        style={{ marginTop: "10px", marginBottom: "10px" }}
+        align="end"
+        pageSize={meta?.limit}
+        onChange={(value) => setPage(value)}
+        total={meta?.total}
+        current={page}
+      />
+    </div>
   );
 };
 

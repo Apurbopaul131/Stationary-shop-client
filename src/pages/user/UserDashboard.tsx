@@ -31,12 +31,13 @@ const UserDashboard = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  const { data: products } = useGetAllproductQuery(undefined, {
+  const { data: products } = useGetAllproductQuery([{}], {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
+  console.log(products);
   return (
     <Row gutter={16}>
       <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>

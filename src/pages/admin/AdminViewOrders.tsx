@@ -14,8 +14,15 @@ import "../../styles/customTable.css";
 import { TOrder, TResponse } from "../../types";
 
 //type for handle table
-type TTableData = Pick<TOrder, "product" | "status" | "email"> & {
+// type TTableData = Pick<TOrder, "product" | "status" | "email"> & {
+//   key: string;
+// };
+type TTableData = {
   key: string;
+  product: string;
+  status: string;
+  email: string;
+  transactionId: string;
 };
 
 const AdminViewOrders = () => {
@@ -147,6 +154,10 @@ const AdminViewOrders = () => {
       dataIndex: "email",
     },
     {
+      title: "Transaction Id",
+      dataIndex: "transactionId",
+    },
+    {
       title: "Status",
       dataIndex: "status",
     },
@@ -184,12 +195,15 @@ const AdminViewOrders = () => {
   ];
   const orderDataSource: TTableData[] =
     orders?.data.length &&
-    (orders?.data as TOrder[]).map(({ _id, product, email, status }) => ({
-      key: _id,
-      product: product?.name,
-      email,
-      status,
-    }));
+    (orders?.data as TOrder[]).map(
+      ({ _id, product, email, status, transaction }) => ({
+        key: _id,
+        product: product?.name,
+        email,
+        status,
+        transactionId: transaction.id,
+      })
+    );
   return (
     <div>
       <Table

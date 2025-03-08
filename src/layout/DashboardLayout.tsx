@@ -1,6 +1,6 @@
 import { LogoutOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import paperCartLogo from "../assets/images/shop-logo.png";
 import { adminPahts } from "../constants/adminsidebar.constants";
 import { userPaths } from "../constants/usersidebar.constants";
@@ -8,6 +8,7 @@ import { logout, selactUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 const { Header, Content, Sider } = Layout;
 const DashboardLayout = () => {
+  const navigate = useNavigate();
   const user = useAppSelector(selactUser);
   const dispatch = useAppDispatch();
   const userRole = {
@@ -53,9 +54,11 @@ const DashboardLayout = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            cursor: "pointer",
           }}
         >
           <div
+            onClick={() => navigate("/")}
             style={{
               color: "white",
               height: "4rem",

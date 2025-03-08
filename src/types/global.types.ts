@@ -51,9 +51,20 @@ export type TProduct = {
   inStock: boolean;
 };
 export type TStatus = "Pending" | "Shipping";
+type TTransaction = {
+  id: string;
+  transactionStatus: string | null;
+  bank_status: string;
+  date_time: string; // ISO date-time string
+  method: string;
+  payment_status: string;
+  sp_code: string;
+  sp_message: string;
+};
 export type TOrder = {
   _id: string;
   email: string;
+  transaction: TTransaction;
   product: TProduct;
   quantity: number;
   totalPrice: number;

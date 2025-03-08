@@ -6,7 +6,7 @@ import {
 } from "../../redux/features/admin/productManagementApi";
 
 import type { TableColumnsType } from "antd";
-import { Button, Modal, Space, Table } from "antd";
+import { Button, Modal, Pagination, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -21,12 +21,14 @@ const ViewProducts = () => {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null
   );
+  //state for handle pagination
+  const [page, setPage] = useState(1);
   //Get all product query in redux
   const {
     data: products,
     isLoading,
     isFetching,
-  } = useGetAllproductQuery([{}], {
+  } = useGetAllproductQuery([{ name: "page", value: page }], {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -35,7 +37,8 @@ const ViewProducts = () => {
 
   //Delete product mutation in redux
   const [deleteProduct] = useDeleteProductMutation();
-
+  //take meta form product
+  const metaData = products?.meta;
   //handle show confirm delete modal
   const showModal = (productId: string) => {
     setSelectedProductId(productId);
@@ -151,6 +154,14 @@ const ViewProducts = () => {
         pagination={false}
       />
       ;
+      <Pagination
+        style={{ marginTop: "10px", marginBottom: "10px", color: "red" }}
+        align="end"
+        pageSize={metaData?.limit}
+        onChange={(value) => setPage(value)}
+        total={metaData?.total}
+        current={page}
+      />
     </div>
   );
 };

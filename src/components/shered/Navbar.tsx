@@ -1,7 +1,7 @@
 import { LoginOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Flex, Typography } from "antd";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import papaerCardLogo from "../../assets/images/shop-logo.png";
 import {
   logout,
@@ -13,13 +13,19 @@ import "./Navbar.css";
 
 const { Title } = Typography;
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const token = useAppSelector(selactToken);
   const user = useAppSelector(selactUser);
   const dispatch = useAppDispatch();
   return (
     <nav className="navbar">
-      <Flex align="center" gap="small">
+      <Flex
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer" }}
+        align="center"
+        gap="small"
+      >
         <img src={papaerCardLogo} alt="papaerCardLogo" />
         <Title level={3}>PaperCard</Title>
       </Flex>

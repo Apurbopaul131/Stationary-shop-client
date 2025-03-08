@@ -8,6 +8,7 @@ type TTableData = {
   product: string;
   email: string;
   status: TStatus;
+  transactionId: string;
 };
 
 const StaticOrderTable = ({
@@ -29,17 +30,22 @@ const StaticOrderTable = ({
       dataIndex: "email",
     },
     {
+      title: "Transaction Id",
+      dataIndex: "transactionId",
+    },
+    {
       title: "Status",
       dataIndex: "status",
     },
   ];
   //data source for table
   const orderDataSource: TTableData[] = orders?.map(
-    ({ _id, product, email, status }) => ({
+    ({ _id, product, email, status, transaction }) => ({
       key: _id,
       product: product?.name,
       email,
       status,
+      transactionId: transaction.id,
     })
   );
 

@@ -23,7 +23,7 @@ const ProductContainer = () => {
       <Row gutter={[16, 16]}>
         {products?.data &&
           (products?.data as TProduct[])
-            .slice(0, 3)
+            .slice(0, 4)
             .map(({ _id, name, image, description, price }) => (
               <ProductCard
                 key={_id}
