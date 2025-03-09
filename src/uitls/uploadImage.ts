@@ -1,9 +1,7 @@
 export const uploadImageToCloudinary = async (imageFile: File) => {
-  console.log(imageFile);
   const preset_key = "g3wftqry";
   const cloud_name = "dvqqxighm";
   const formData = new FormData();
-  console.log(imageFile);
   // const file = data:${fileInput1.files[0].type};base64,` + ${fileInput.value[0]}
   formData.append("file", imageFile);
   formData.append("upload_preset", preset_key);
@@ -15,6 +13,5 @@ export const uploadImageToCloudinary = async (imageFile: File) => {
     }
   );
   const result = await res.json();
-  console.log(result);
   return result.secure_url;
 };

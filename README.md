@@ -1,51 +1,75 @@
-# React + TypeScript + Vite
+### 1.Project Name: PaperCard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 2. Project Title: This is PaperCard project that controls all work related to stationary shop.
 
-Currently, two official plugins are available:
+### 3. Key Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Admin Functionalities:
 
-## Expanding the ESLint configuration
+- Admin can create an stationary product.
+- Admin can update and delete the product.
+- Admin can view all order details.
+- Admin can accept the order that changes status pending to shipping.
+- Admin can delete the order.
+- Admin view details into dashboard.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### User Functionalities:
 
-- Configure the top-level `parserOptions` property like this:
+- User seach stationary product by category, title and description.
+- User can filter the product by category.
+- User can sort the product by price.
+- User can view details of the product.
+- User can purchase product by complete payment.
+- User can view already ordered product in dashboard.
+- User can view registered details in dashboard.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 4. Frontend Technology Used:
+
+- React
+- Redux
+- Ant Design
+- Css
+
+### 5. Backend Technology Used:
+
+- Typescript
+- Express Js
+- Mongoose
+- MongoDB
+
+## How to locally run the Frontend:
+
+### 1. Clone the Repository
+
+Run the following command in your terminal to clone the repository:
+
+```javascript
+git clone https://github.com/Apollo-Level2-Web-Dev/batch-4-assignment-2.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Navigate to the Project Directory
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Run the following command to by adding expected directory name:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```javascript
+cd your-repo-name
 ```
-"# Stationary-shop-client" 
+
+### 3. Install Dependencies
+
+Install the required dependencies using npm or yarn:
+
+```javascript
+npm install
+// or
+yarn install
+```
+
+### 7. Run the Project
+
+```javascript
+//development mode
+npm run dev
+```
+
+### 8.Frontend live link: https://stationary-shop-client-one.vercel.app/

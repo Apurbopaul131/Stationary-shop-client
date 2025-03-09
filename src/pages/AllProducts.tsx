@@ -24,7 +24,7 @@ const AllProducts = () => {
     { name: "page", value: page },
     ...params,
   ]);
-  console.log(products?.meta);
+
   const productFiterItems: TabsProps["items"] =
     productCategoriesAllProducts.map((category) => ({
       key: category,

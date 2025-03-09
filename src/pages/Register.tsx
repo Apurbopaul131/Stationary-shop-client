@@ -27,7 +27,6 @@ const Register = () => {
     });
     const { image, ...remainingData } = data;
     const imageUrl = await uploadImageToCloudinary(image);
-    console.log("cloudinary image url:", imageUrl);
     const registerData = { image: imageUrl, ...remainingData };
     try {
       const registeredUser = (await register(

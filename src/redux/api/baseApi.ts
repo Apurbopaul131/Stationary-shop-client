@@ -13,7 +13,7 @@ import { RootState } from "../store";
 // cloud Name: dvqqxighm
 // upload Preset name: g3wftqry
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://stationery-shop-theta.vercel.app/api",
+  baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const { token } = (getState() as RootState).login;
@@ -44,13 +44,10 @@ const baseQueryWithReauth: BaseQueryFn<
     });
   }
   if (result?.error && result?.error?.status === 401) {
-    const res = await fetch(
-      "https://stationery-shop-theta.vercel.app/api/auth/refresh-token",
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    );
+    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+      method: "POST",
+      credentials: "include",
+    });
     const refreshResults = await res.json();
     if (refreshResults?.data?.token) {
       const currentUser = (api.getState() as RootState).login.user;

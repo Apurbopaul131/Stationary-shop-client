@@ -4,7 +4,6 @@ import { useAppSelector } from "../redux/hooks";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const token = useAppSelector(selactToken);
-  console.log(token);
   if (!token) {
     return <Navigate to={"/login"} replace={true}></Navigate>;
   }

@@ -17,7 +17,7 @@ const ViewOrders = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  console.log(orders?.data);
+
   //columns for table
   const columns: TableColumnsType<TTableData> = [
     {

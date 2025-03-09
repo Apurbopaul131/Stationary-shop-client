@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import PcForm from "../../components/form/PcForm";
 import PcInput from "../../components/form/pcInput";
+import PcNumberInput from "../../components/form/PcNumberInput";
 import PcSelactInput from "../../components/form/PcSelectInput";
 import PcTextarea from "../../components/form/PcTextarea";
 import LoadingSpinner from "../../components/shered/LoadingSpinner";
@@ -29,7 +30,6 @@ const UpdateProduct = () => {
     data: product,
     isLoading,
     isFetching,
-    refetch,
   } = useGetProductQuery(productId);
 
   const [updateProduct] = useUpdateProductMutation();
@@ -42,19 +42,15 @@ const UpdateProduct = () => {
       },
       position: "top-center",
     });
-    const { price, quantity, ...remainingData } = data;
     const updatedDataWithId = {
       productId,
-      price: /\./.test(data?.price) ? eval(data?.price) : Number(data?.price),
-      quantity: Number(quantity),
-      ...remainingData,
+      ...data,
     };
     try {
       //call the mutaion function
       const result = (await updateProduct(
         updatedDataWithId
       )) as TResponse<TProduct>;
-      refetch();
       //show product already exist error!
       if (result?.error) {
         toast.error(result?.error?.data?.message, {
@@ -102,8 +98,8 @@ const UpdateProduct = () => {
     description: product?.data?.description,
     image: product?.data?.image,
     inStock: product?.data?.inStock,
-    price: String(product?.data?.price),
-    quantity: String(product?.data?.quantity),
+    price: product?.data?.price,
+    quantity: product?.data?.quantity,
   };
   if (isLoading && isFetching) {
     return <LoadingSpinner />;
@@ -119,7 +115,7 @@ const UpdateProduct = () => {
           >
             <PcInput type="text" name="name" label="Title:" />
             <PcInput type="text" name="brand" label="Brand:" />
-            <PcInput type="number" name="price" label="Price:" />
+            <PcNumberInput name="price" label="Price:" />
             <PcSelactInput
               name="category"
               label="Category:"
@@ -128,7 +124,7 @@ const UpdateProduct = () => {
             />
             <PcInput type="url" name="image" label="Image url:" />
             <PcTextarea name="description" label="Description:" rows={4} />
-            <PcInput type="number" name="quantity" label="Quantity:" />
+            <PcNumberInput name="quantity" label="Quantity:" />
             <PcSelactInput
               name="inStock"
               label="Stock:"

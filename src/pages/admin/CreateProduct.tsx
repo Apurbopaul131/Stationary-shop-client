@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import PcFileinput from "../../components/form/PcFileinput";
 import PcForm from "../../components/form/PcForm";
 import PcInput from "../../components/form/pcInput";
+import PcNumberInput from "../../components/form/PcNumberInput";
 import PcSelactInput from "../../components/form/PcSelectInput";
 import PcTextarea from "../../components/form/PcTextarea";
 import {
@@ -21,7 +22,6 @@ import { uploadImageToCloudinary } from "../../uitls/uploadImage";
 const CreateProduct = () => {
   const [createProduct] = useCreateProductMutation();
   const createProductOnSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const toastId = toast.loading("Creating Product...", {
       style: {
         padding: "10px",
@@ -34,13 +34,14 @@ const CreateProduct = () => {
     const product = {
       name: data?.name,
       brand: data?.brand,
-      price: /\./.test(data?.price) ? eval(data?.price) : Number(data?.price),
+      price: data?.price,
       category: data?.category,
       image: imageUrl,
       description: data?.description,
-      quantity: Number(data?.quantity),
+      quantity: data?.quantity,
       inStock: data?.inStock,
     };
+
     try {
       //call the mutaion function
       const result = (await createProduct(product)) as TResponse<TProduct>;
@@ -90,9 +91,23 @@ const CreateProduct = () => {
           onSubmit={createProductOnSubmit}
           resolver={zodResolver(createProductValidationSchmea)}
         >
-          <PcInput type="text" name="name" label="Title:" />
-          <PcInput type="text" name="brand" label="Brand:" />
-          <PcInput type="number" name="price" label="Price:" />
+          <PcInput
+            type="text"
+            name="name"
+            label="Title:"
+            placeholder="Enter the product title..."
+          />
+          <PcInput
+            type="text"
+            name="brand"
+            label="Brand:"
+            placeholder="Enter the product brand..."
+          />
+          <PcNumberInput
+            name="price"
+            label="Price:"
+            placeholder="Enter the product price..."
+          />
           <PcSelactInput
             name="category"
             label="Category:"
@@ -100,8 +115,17 @@ const CreateProduct = () => {
             placeholder="Selact an categories:"
           />
           <PcFileinput name="image" label="Image Url:" />
-          <PcTextarea name="description" label="Description:" rows={4} />
-          <PcInput type="number" name="quantity" label="Quantity:" />
+          <PcTextarea
+            name="description"
+            label="Description:"
+            rows={4}
+            placeholer="Enter the product description..."
+          />
+          <PcNumberInput
+            name="quantity"
+            label="Quantity:"
+            placeholder="Enter the product quantity..."
+          />
           <PcSelactInput
             name="inStock"
             label="Stock:"

@@ -16,9 +16,8 @@ import handleJwtTokenDecode from "../uitls/jwtDecode";
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
-  console.log(error);
   const handleOnSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Loggedin...", {
       style: {
@@ -30,10 +29,8 @@ const Login = () => {
     });
     try {
       const result = await login(data).unwrap();
-      // console.log(result);
       if (result?.success && result?.data?.token) {
         const decodedUser = handleJwtTokenDecode(result?.data?.token) as TUser;
-        console.log("decoced User", decodedUser);
         dispatch(setUser({ user: decodedUser, token: result?.data?.token }));
         toast.success(result?.message, {
           style: {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ const ProductCart = () => {
     setTotalPrice(productTotalPrice);
   }, [product?.data?.price, quantity]);
   const handleProcedCheckout = async () => {
-    toast.loading("processing...", {
+    const toastId = toast.loading("processing...", {
       style: {
         padding: "10px",
         borderRadius: "8px",
@@ -44,7 +45,16 @@ const ProductCart = () => {
         }, 1000);
       }
     } catch (err) {
-      console.log(err);
+      toast.error("Payment initialize failed...", {
+        id: toastId,
+        duration: 2000,
+        style: {
+          padding: "10px",
+          borderRadius: "8px",
+          color: "red",
+        },
+        position: "top-center",
+      });
     }
   };
   if (isLoading || isFetching) {

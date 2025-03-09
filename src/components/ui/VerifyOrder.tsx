@@ -11,7 +11,7 @@ const VerifyOrder = () => {
     isLoading,
     isFetching,
   } = useVerifyOrderQuery(searchParams.get("order_id"));
-  console.log(verifiedInfomration?.data?.[0].bank_status);
+
   if (isLoading && isFetching) {
     return <LoadingSpinner />;
   }
