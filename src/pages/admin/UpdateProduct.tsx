@@ -30,7 +30,12 @@ const UpdateProduct = () => {
     data: product,
     isLoading,
     isFetching,
-  } = useGetProductQuery(productId);
+  } = useGetProductQuery(productId, {
+    pollingInterval: 3000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: true,
+  });
 
   const [updateProduct] = useUpdateProductMutation();
   const updateProductOnsubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -76,7 +81,7 @@ const UpdateProduct = () => {
           id: toastId,
           duration: 2000,
         });
-        navigate("/admin/products");
+        navigate(`/products/${productId}`);
       }
     } catch (err: any) {
       toast.error("Product creation failed!", {
