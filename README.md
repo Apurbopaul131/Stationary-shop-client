@@ -44,7 +44,7 @@
 Run the following command in your terminal to clone the repository:
 
 ```javascript
-git clone https://github.com/Apollo-Level2-Web-Dev/batch-4-assignment-2.git
+git clone https://github.com/Apurbopaul131/Stationary-shop-client.git
 ```
 
 ### 2. Navigate to the Project Directory
