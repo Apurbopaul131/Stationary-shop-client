@@ -1,3 +1,5 @@
+#PAPERCARD FRONTEND
+
 ### 1.Project Name: PaperCard
 
 ### 2. Project Title: This is PaperCard project that controls all work related to stationary shop.
@@ -6,6 +8,7 @@
 
 ### Admin Functionalities:
 
+- Admin can login into dashboard using email and password.
 - Admin can create an stationary product.
 - Admin can update and delete the product.
 - Admin can view all order details.
