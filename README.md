@@ -75,6 +75,8 @@ yarn install
 npm run dev
 ```
 
-### Frontend live link: https://stationary-shop-client-one.vercel.app/
+### Frontend live link: https://stationary-shop-client-one.vercel.app
+
+### project presentation vedio link: https://drive.google.com/file/d/19RqS6FvTNPlebIJ0Ig4G-Wlc_buqB8Yq/view?usp=drive_link
 
 Go to stationary-shop backend source code using [PAPERCARD-BACKEND](https://github.com/Apurbopaul131/Stationery-Shop-B4A2V5.git).
