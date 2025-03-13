@@ -1,6 +1,7 @@
 import { MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
 
+//admin dashboard sidebar options
 export const adminPahts: MenuProps["items"] = [
   {
     key: "dashboard",

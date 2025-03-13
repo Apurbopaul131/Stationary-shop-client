@@ -21,6 +21,8 @@ import { uploadImageToCloudinary } from "../../uitls/uploadImage";
 
 const CreateProduct = () => {
   const [createProduct] = useCreateProductMutation();
+
+  //This function are handled all work related to create product
   const createProductOnSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating Product...", {
       style: {
@@ -30,6 +32,7 @@ const CreateProduct = () => {
       },
       position: "top-center",
     });
+    //upload image to cloudinary
     const imageUrl = await uploadImageToCloudinary(data?.image);
     const product = {
       name: data?.name,

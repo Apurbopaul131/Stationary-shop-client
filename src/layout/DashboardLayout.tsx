@@ -11,10 +11,12 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const user = useAppSelector(selactUser);
   const dispatch = useAppDispatch();
+
   const userRole = {
     ADMIN: "admin",
     USER: "user",
   };
+  //logic for generated role based side bar
   const role = user?.role;
   let sidebarItems;
   switch (role) {

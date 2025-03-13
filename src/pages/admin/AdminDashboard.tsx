@@ -9,17 +9,19 @@ import { useGetUserQuery } from "../../redux/features/auth/authApi";
 import { logout } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 
-// const { Sider } = Layout;
 const { Title, Text } = Typography;
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch();
+  //This redux hook are used for get all user
   const { data: user } = useGetUserQuery(undefined, {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
+
+  //This redux hook are used for get all order
   const {
     data: orders,
     isFetching,
@@ -30,6 +32,8 @@ const AdminDashboard = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
+
+  //This redux hook are used for get all product
   const { data: products } = useGetAllproductQuery([{}], {
     pollingInterval: 3000,
     refetchOnFocus: true,

@@ -10,8 +10,6 @@ const ProductCard = ({
   price,
   image,
 }: Pick<TProduct, "_id" | "name" | "description" | "price" | "image">) => {
-  console.log(name.length);
-  console.log(description.length);
   return (
     <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
       <Card style={{ borderRadius: "10px", backgroundColor: "#FEEAE9" }}>

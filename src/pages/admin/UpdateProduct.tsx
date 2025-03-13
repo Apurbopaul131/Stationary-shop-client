@@ -24,8 +24,11 @@ import { updateProductValidationSchmea } from "../../schemas/product.schema";
 import { TProduct, TResponse } from "../../types";
 
 const UpdateProduct = () => {
+  //react-dom hook used for redirect and get dynamic params
   const navigate = useNavigate();
   const { productId } = useParams();
+
+  //get single product
   const {
     data: product,
     isLoading,
@@ -36,8 +39,10 @@ const UpdateProduct = () => {
     refetchOnReconnect: true,
     refetchOnMountOrArgChange: true,
   });
-
+  //this hook used for handle update product mutaion
   const [updateProduct] = useUpdateProductMutation();
+
+  //This method is used for handle all update product related work
   const updateProductOnsubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("updating Product...", {
       style: {
