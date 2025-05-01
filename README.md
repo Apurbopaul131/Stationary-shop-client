@@ -40,6 +40,14 @@
 - Mongoose
 - MongoDB
 
+### 5. Challenges:
+
+Implementing search, filter, and sort functionality for stationary products presented several challenges. Searching by title and description required handling partial and case-insensitive matches efficiently, which affected performance without proper indexing. Filtering by category while maintaining other active criteria like search and sort introduced complexity in query construction and state management. Additionally, sorting by price needed to work seamlessly with existing filters, ensuring the UI updated accurately and in sync with backend results.
+
+### Future Work:
+
+Allow users to leave reviews and rate products to build trust and help future buyers make informed decisions. Use user behavior and purchase history to suggest relevant products through personalized recommendations.
+
 ## How to locally run the Frontend:
 
 ### 1. Clone the Repository
