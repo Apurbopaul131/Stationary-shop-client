@@ -16,7 +16,7 @@ const ProductDetails = () => {
   });
 
   return (
-    <div style={{ width: "90%", margin: "20px auto" }}>
+    <div style={{ marginTop: "20px", marginBottom: "20px" }}>
       {isFetching && isLoading ? (
         <LoadingState />
       ) : (

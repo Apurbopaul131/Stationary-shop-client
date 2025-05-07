@@ -5,7 +5,7 @@ const { Title } = Typography;
 const BestOffers = () => {
   return (
     <section className="best-offers">
-      <Title level={1} style={{ fontWeight: "bold", marginBottom: "2rem" }}>
+      <Title level={2} style={{ fontWeight: "bold" }}>
         Best offers for you
       </Title>
       <Row gutter={[24, 24]} justify="center">

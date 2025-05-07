@@ -1,17 +1,21 @@
 import BannerSlider from "../components/layout/BannerSlider";
 import BestOffers from "../components/layout/BestOffers";
-import AppFooter from "../components/shered/AppFooter";
 import ProductContainer from "../components/shered/ProductContainer";
 import GetTouch from "../components/ui/GetTouch";
+import Supporters from "../components/ui/Supporters";
+import TopCategory from "../components/ui/TopCatefory";
+import UserTestimonials from "../components/ui/UserTestimonials";
 
 const Home = () => {
   return (
-    <div style={{ width: "90%", margin: "0 auto" }}>
+    <div style={{}}>
       <BannerSlider></BannerSlider>
+      <TopCategory />
       <BestOffers></BestOffers>
       <ProductContainer></ProductContainer>
       <GetTouch></GetTouch>
-      <AppFooter></AppFooter>
+      <Supporters />
+      <UserTestimonials />
     </div>
   );
 };

@@ -86,7 +86,7 @@ const AllProducts = () => {
     setParams(queryItems);
   };
   return (
-    <div style={{ width: "90%", margin: "0 auto" }}>
+    <div style={{}}>
       <div
         style={{
           display: "flex",

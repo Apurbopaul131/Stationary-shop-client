@@ -10,7 +10,7 @@ const GetTouch = () => {
         alignItems: "center",
         borderRadius: "10px",
         backgroundColor: "#FEEAE9",
-        margin: "4rem 0",
+        marginBottom: "2rem",
         padding: "60px 0",
       }}
     >

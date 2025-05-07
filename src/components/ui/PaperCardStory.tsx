@@ -7,11 +7,13 @@ const PaperCardStory = () => {
       style={{
         textAlign: "center",
         backgroundColor: "#FEEAE9",
-        marginTop: "20px",
-        marginBottom: "4rem",
+        marginTop: "2rem",
+        marginBottom: "2rem",
         borderRadius: "5px",
         paddingTop: "40px",
         paddingBottom: "40px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
       }}
     >
       <p>PAPERCARD STORY</p>

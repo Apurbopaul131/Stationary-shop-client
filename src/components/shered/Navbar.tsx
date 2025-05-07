@@ -36,8 +36,10 @@ const Navbar = () => {
         >
           Home
         </NavLink>
-        <NavLink to={"/about"}>About</NavLink>
         <NavLink to={"/products"}>All Products</NavLink>
+        <NavLink to={"/about"}>About</NavLink>
+        <NavLink to={"/contact"}>Contact</NavLink>
+        <NavLink to={"/faq"}>FAQ</NavLink>
         {token && <NavLink to={`/${user?.role}/dashboard`}>Dashboard</NavLink>}
         {!token ? (
           <Link to={"/login"}>

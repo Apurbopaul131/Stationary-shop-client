@@ -9,12 +9,11 @@ const { Title } = Typography;
 const ProductContainer = () => {
   const { data: products } = useGetAllproductQuery([{}]);
   return (
-    <div style={{ margin: "4rem 0" }}>
+    <div style={{ margin: "2rem 0" }}>
       <Title
-        level={1}
+        level={2}
         style={{
           fontWeight: "bold",
-          marginBottom: "2rem",
           textAlign: "center",
         }}
       >

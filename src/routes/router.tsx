@@ -11,6 +11,8 @@ import CreateProduct from "../pages/admin/CreateProduct";
 import UpdateProduct from "../pages/admin/UpdateProduct";
 import ViewProducts from "../pages/admin/ViewProducts";
 import AllProducts from "../pages/AllProducts";
+import Contact from "../pages/Contact";
+import FAQ from "../pages/FAQ";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ProductDetails from "../pages/ProductDetails";
@@ -27,13 +29,22 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+
+      {
+        path: "products",
+        element: <AllProducts />,
+      },
       {
         path: "about",
         element: <About />,
       },
       {
-        path: "products",
-        element: <AllProducts />,
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "faq",
+        element: <FAQ />,
       },
       {
         path: "products/:productId",
