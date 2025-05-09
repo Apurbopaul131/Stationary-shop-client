@@ -1,4 +1,4 @@
-import { Flex, Spin } from "antd";
+import { Spin } from "antd";
 import React from "react";
 
 const LoadingSpinner = () => {
@@ -15,11 +15,7 @@ const LoadingSpinner = () => {
     return () => clearTimeout(timerRef.current!);
   }, [percent]);
 
-  return (
-    <Flex justify="center" align="center" gap="middle">
-      <Spin percent={percent} size="large" />
-    </Flex>
-  );
+  return <Spin percent={percent} size="large" />;
 };
 
 export default LoadingSpinner;

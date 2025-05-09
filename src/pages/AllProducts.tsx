@@ -2,6 +2,7 @@ import { Input, Select, Tabs, TabsProps, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { GetProps } from "react-redux";
 import { useLocation } from "react-router-dom";
+import LoadingSpinner from "../components/shered/LoadingSpinner";
 import AllProductsCategory from "../components/ui/AllProductsCategory";
 import { productCategoriesAllProducts } from "../constants/createproduct.constants";
 import { useGetAllproductQuery } from "../redux/features/admin/productManagementApi";
@@ -52,7 +53,16 @@ const AllProducts = () => {
           page={page}
         ></AllProductsCategory>
       ) : (
-        <p>No data</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+            marginBottom: "2rem",
+          }}
+        >
+          <LoadingSpinner />
+        </div>
       ),
     }));
   const onSearch: TSearchProps["onSearch"] = (value) => {

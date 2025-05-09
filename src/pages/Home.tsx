@@ -8,7 +8,7 @@ import UserTestimonials from "../components/ui/UserTestimonials";
 import { useGetAllproductQuery } from "../redux/features/admin/productManagementApi";
 
 const Home = () => {
-  const { data: products } = useGetAllproductQuery([{}]);
+  const { data: products, isLoading } = useGetAllproductQuery([{}]);
   return (
     <div style={{}}>
       <BannerSlider></BannerSlider>
@@ -18,6 +18,7 @@ const Home = () => {
         products={products?.data}
         title="All products"
         indicator="all"
+        isLoading={isLoading}
       ></ProductContainer>
       <GetTouch></GetTouch>
       <Supporters />

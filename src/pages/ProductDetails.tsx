@@ -19,7 +19,8 @@ const ProductDetails = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  const { data: products } = useGetAllproductQuery(
+  console.log(product, "single product");
+  const { data: products, isLoading: isCtgLoading } = useGetAllproductQuery(
     product?.data?.category
       ? [{ name: "category", value: product.data.category }]
       : skipToken,
@@ -29,7 +30,8 @@ const ProductDetails = () => {
       refetchOnReconnect: true,
     }
   );
-  const { data: avgProducts } = useGetAllproductQuery(
+  console.log("total pro", products);
+  const { data: avgProducts, isLoading: isAvgLoading } = useGetAllproductQuery(
     product?.data?.rating ? [{ name: "rating", value: 3 }] : skipToken,
     {
       refetchOnFocus: true,
@@ -37,7 +39,8 @@ const ProductDetails = () => {
       refetchOnReconnect: true,
     }
   );
-  const { data: topProducts } = useGetAllproductQuery(
+  console.log("avg pro", avgProducts);
+  const { data: topProducts, isLoading: isTopLoading } = useGetAllproductQuery(
     product?.data?.rating ? [{ name: "rating", value: 5 }] : skipToken,
     {
       refetchOnFocus: true,
@@ -54,10 +57,23 @@ const ProductDetails = () => {
         <ProductDetailsCard product={product?.data} />
       )}
 
-      <ProductContainer products={products?.data} title="Related Products" />
+      <ProductContainer
+        products={products?.data}
+        title="Related Products"
+        isLoading={isCtgLoading}
+      />
 
-      <ProductContainer products={topProducts?.data} title="Top Products" />
-      <ProductContainer products={avgProducts?.data} title="Avarage Products" />
+      <ProductContainer
+        products={topProducts?.data}
+        title="Top Products"
+        isLoading={isTopLoading}
+      />
+
+      <ProductContainer
+        products={avgProducts?.data}
+        title="Avarage Products"
+        isLoading={isAvgLoading}
+      />
     </div>
   );
 };
