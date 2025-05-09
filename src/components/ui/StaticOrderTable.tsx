@@ -51,7 +51,6 @@ const StaticOrderTable = ({
 
   return (
     <Table
-      className="custom-table"
       loading={isFetching && isLoading}
       columns={columns}
       dataSource={orderDataSource}

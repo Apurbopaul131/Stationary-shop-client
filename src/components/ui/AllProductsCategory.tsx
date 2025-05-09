@@ -17,7 +17,7 @@ const AllProductsCategory = ({
     <div>
       <Row gutter={[16, 16]}>
         {products &&
-          products.map(({ _id, name, image, description, price }) => (
+          products.map(({ _id, name, image, description, price, rating }) => (
             <ProductCard
               key={_id}
               _id={_id}
@@ -25,6 +25,7 @@ const AllProductsCategory = ({
               image={image}
               description={description}
               price={price}
+              rating={rating}
             ></ProductCard>
           ))}
       </Row>

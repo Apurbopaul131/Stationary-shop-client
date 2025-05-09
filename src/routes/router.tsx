@@ -8,6 +8,7 @@ import About from "../pages/About";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminViewOrders from "../pages/admin/AdminViewOrders";
 import CreateProduct from "../pages/admin/CreateProduct";
+import Profile from "../pages/admin/Profile";
 import UpdateProduct from "../pages/admin/UpdateProduct";
 import ViewProducts from "../pages/admin/ViewProducts";
 import AllProducts from "../pages/AllProducts";
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
         path: "orders",
         element: <AdminViewOrders />,
       },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
     ],
   },
   {
@@ -110,14 +115,18 @@ export const router = createBrowserRouter([
         path: "orders",
         element: <ViewOrders />,
       },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
     ],
   },
   {
-    path: "/login",
+    path: "login",
     element: <Login />,
   },
   {
-    path: "/register",
+    path: "register",
     element: <Register />,
   },
 ]);

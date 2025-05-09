@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, StarOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { TProduct } from "../../types";
@@ -47,6 +47,14 @@ const ProductDetailsCard = ({ product }: { product: TProduct }) => {
             </span>
             {product?.quantity}
           </p>
+          {Array(product?.rating)
+            .fill(null)
+            .map((_, idx) => (
+              <StarOutlined
+                key={idx}
+                style={{ marginTop: "10px", color: "#FAAD14" }}
+              />
+            ))}
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Title level={1} style={{ color: "#FAAD14" }}>
               ${product?.price}

@@ -27,7 +27,7 @@ const PaperCardContactContainer = () => {
     console.log(data);
   };
   return (
-    <div>
+    <div style={{ marginBottom: "10px" }}>
       <Title level={2} style={{ textAlign: "center", fontWeight: "bold" }}>
         Send us message
       </Title>

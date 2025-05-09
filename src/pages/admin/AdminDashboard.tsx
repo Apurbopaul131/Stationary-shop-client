@@ -1,32 +1,29 @@
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Flex, Row, Typography } from "antd";
+import { Button, Col, Row, Typography } from "antd";
 import { Link } from "react-router-dom";
+import DashboaedCard from "../../components/ui/DashboardCard";
 import DashboardBarChart from "../../components/ui/DashbordBarChart";
 import StaticOrderTable from "../../components/ui/StaticOrderTable";
-import { useGetAllOrderQuery } from "../../redux/features/admin/orderManagementApi";
+import {
+  useGetAllOrderQuery,
+  useTotalRevenueQuery,
+} from "../../redux/features/admin/orderManagementApi";
 import { useGetAllproductQuery } from "../../redux/features/admin/productManagementApi";
-import { useGetUserQuery } from "../../redux/features/auth/authApi";
-import { logout } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hooks";
 
-const { Title, Text } = Typography;
-
+const { Title } = Typography;
 const AdminDashboard = () => {
-  const dispatch = useAppDispatch();
-  //This redux hook are used for get all user
-  const { data: user } = useGetUserQuery(undefined, {
+  //This redux hook are used for get all order
+  const {
+    data: orders,
+    isFetching,
+    isLoading,
+  } = useGetAllOrderQuery([{}], {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
 
-  //This redux hook are used for get all order
-  const {
-    data: orders,
-    isFetching,
-    isLoading,
-  } = useGetAllOrderQuery(undefined, {
+  const { data: revenue } = useTotalRevenueQuery(undefined, {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -40,87 +37,57 @@ const AdminDashboard = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
+  
   return (
-    <Row gutter={16}>
-      <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
-        <div
-          style={{
-            minHeight: "100vh",
-            borderRadius: "10px",
-            backgroundColor: "#001529",
-          }}
-        >
-          {/* Sidebar */}
-          <div
-            style={{
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <Flex vertical align="center">
-              <Avatar
-                size={80}
-                icon={<UserOutlined />}
-                src={user?.data.image}
-                style={{ marginBottom: 20 }}
-              />
-              <Title level={4} style={{ color: "#fff" }}>
-                {user?.data && user?.data?.name}
-              </Title>
-              <Text style={{ color: "#bbb" }}>
-                {user?.data && user?.data?.email}
-              </Text>
-            </Flex>
-            <Card
-              style={{ marginTop: 20, background: "#FEEAE9", color: "#fff" }}
-            >
-              <Text style={{ color: "#FF136F" }}>
-                Total Orders: {orders?.data?.length}
-              </Text>
-            </Card>
-            <Card
-              style={{ marginTop: 10, background: "#FEEAE9", color: "#fff" }}
-            >
-              <Text style={{ color: "#FF136F" }}>
-                Total Products: {products?.data?.length}
-              </Text>
-            </Card>
-            <Link to={"/"}>
-              <Button
-                block
-                style={{
-                  marginTop: 20,
-                  backgroundColor: "#FAAD14",
-                  border: "none",
-                  color: "white",
-                }}
-              >
-                Home
-              </Button>
-            </Link>
-            <Button
-              onClick={() => dispatch(logout())}
-              color="danger"
-              block
-              variant="solid"
-              style={{ marginTop: 10 }}
-            >
-              Logout
-            </Button>
-          </div>
-        </div>
-      </Col>
-      <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 16 }}>
-        <Flex vertical gap={16}>
+    <div>
+      <Title
+        level={2}
+        style={{
+          fontWeight: "bold",
+        }}
+      >
+        Admin Dashboard
+      </Title>
+      <Row gutter={[16, 16]} style={{ marginBottom: "2rem" }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+          <DashboaedCard
+            title="Total revenue"
+            result={revenue?.data[0]?.totalRevenue}
+          />
+        </Col>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+          <DashboaedCard title="Total product" result={products?.meta?.total} />
+        </Col>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+          <DashboaedCard title="Total order" result={orders?.meta?.total} />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 16 }}>
           <StaticOrderTable
-            orders={orders?.data}
+            orders={orders?.data?.slice(0, 5)}
             isLoading={isLoading}
             isFetching={isFetching}
           />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginTop: "0.5rem",
+            }}
+          >
+            <Link to={"/admin/orders"}>
+              <Button color="danger" variant="solid">
+                SeeMore
+              </Button>
+            </Link>
+          </div>
+        </Col>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
           <DashboardBarChart />
-        </Flex>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

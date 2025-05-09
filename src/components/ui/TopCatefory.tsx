@@ -6,6 +6,7 @@ import {
   ReadOutlined,
 } from "@ant-design/icons";
 import { Card, Col, Row, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -18,6 +19,20 @@ const categories = [
 ];
 
 const TopCategory = () => {
+  // const [category, setCategory] = useState("All");
+  // const { data: products } = useGetAllproductQuery([
+  //   { name: "category", value: category },
+  // ]);
+  // console.log(products);
+  const navigate = useNavigate();
+  const handleCategoryClick = (categoryName: string) => {
+    navigate("/products", {
+      state: { selectedCategory: categoryName },
+    });
+
+    // Add your logic here to handle the category click
+  };
+
   return (
     <div style={{ marginBottom: "2rem" }}>
       <Title level={2} style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -34,6 +49,7 @@ const TopCategory = () => {
                 borderRadius: 12,
                 backgroundColor: "#f5f5f5",
               }}
+              onClick={() => handleCategoryClick(cat.name)}
             >
               <div style={{ fontSize: "32px", color: "#FF4D4F" }}>
                 {cat.icon}

@@ -7,6 +7,9 @@
   color: #1f1f1f;
   position: relative;
   border-radius: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 .menu {

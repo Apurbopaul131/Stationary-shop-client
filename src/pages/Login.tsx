@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Flex, Space } from "antd";
+import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -18,6 +19,21 @@ const Login = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
 
+  const [demoCredential, setDemocredential] = useState({});
+  const handleAutoFill = (type: "user" | "admin") => {
+    if (type === "user") {
+      setDemocredential({
+        email: "ahonapaul181@gmail.com",
+        password: "ahona123",
+      });
+    } else {
+      setDemocredential({
+        email: "apurbopaul131@gmail.com",
+        password: "apurbo123",
+      });
+    }
+  };
+  console.log(demoCredential);
   const handleOnSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Loggedin...", {
       style: {
@@ -63,6 +79,7 @@ const Login = () => {
       <PcForm
         onSubmit={handleOnSubmit}
         resolver={zodResolver(userLoginValidationSchema)}
+        demoCredintial={demoCredential}
         style={{
           minWidth: "400px",
           padding: "1rem",
@@ -79,6 +96,29 @@ const Login = () => {
         >
           Sign in to your account
         </h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "10px",
+            marginBottom: "10px",
+          }}
+        >
+          <Button
+            color="danger"
+            variant="solid"
+            onClick={() => handleAutoFill("user")}
+          >
+            user Credential
+          </Button>
+          <Button
+            color="danger"
+            variant="solid"
+            onClick={() => handleAutoFill("admin")}
+          >
+            Admin Credential
+          </Button>
+        </div>
 
         <Space direction="vertical" size="small" style={{ display: "flex" }}>
           <PcInput type="email" name="email" label="Email:" />

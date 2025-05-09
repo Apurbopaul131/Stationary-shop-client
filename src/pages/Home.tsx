@@ -5,14 +5,20 @@ import GetTouch from "../components/ui/GetTouch";
 import Supporters from "../components/ui/Supporters";
 import TopCategory from "../components/ui/TopCatefory";
 import UserTestimonials from "../components/ui/UserTestimonials";
+import { useGetAllproductQuery } from "../redux/features/admin/productManagementApi";
 
 const Home = () => {
+  const { data: products } = useGetAllproductQuery([{}]);
   return (
     <div style={{}}>
       <BannerSlider></BannerSlider>
       <TopCategory />
       <BestOffers></BestOffers>
-      <ProductContainer></ProductContainer>
+      <ProductContainer
+        products={products?.data}
+        title="All products"
+        indicator="all"
+      ></ProductContainer>
       <GetTouch></GetTouch>
       <Supporters />
       <UserTestimonials />

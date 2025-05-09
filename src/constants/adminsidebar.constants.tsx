@@ -31,4 +31,14 @@ export const adminPahts: MenuProps["items"] = [
       },
     ],
   },
+  {
+    key: "setting",
+    label: "Setting",
+    children: [
+      {
+        key: "profile",
+        label: <NavLink to={"/admin/profile"}>Profile</NavLink>,
+      },
+    ],
+  },
 ];

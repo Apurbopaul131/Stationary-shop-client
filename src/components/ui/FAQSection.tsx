@@ -44,7 +44,7 @@ const FAQSection = () => {
       >
         Frequently Asked Questions
       </Title>
-      <Row gutter={24} justify="center">
+      <Row gutter={[24, 24]} justify="center">
         <Col sm={24} md={12}>
           <Collapse
             expandIconPosition="right"
@@ -84,7 +84,7 @@ const FAQSection = () => {
           <div
             style={{
               textAlign: "center",
-              padding: "40px 0px",
+              padding: "40px 40px",
               backgroundColor: "#f5f5f5",
             }}
           >

@@ -5,15 +5,21 @@ import {
   useGetAllproductQuery,
 } from "../../redux/features/admin/productManagementApi";
 
-import type { TableColumnsType } from "antd";
+import type { TableColumnsType, TableProps } from "antd";
 import { Button, Modal, Pagination, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { productCategories } from "../../constants/createproduct.constants";
 import "../../styles/customTable.css";
 import { TProduct } from "../../types";
 //type for handle table
-type TTableData = Pick<TProduct, "image" | "name"> & { key: string };
+type TTableData = Pick<
+  TProduct,
+  "image" | "name" | "category" | "price" | "quantity"
+> & {
+  key: string;
+};
 
 const ViewProducts = () => {
   //state for handle modal
@@ -21,14 +27,16 @@ const ViewProducts = () => {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null
   );
-  //state for handle pagination
+  //state for handle pagination and filtering
   const [page, setPage] = useState(1);
+  const [params, setParams] = useState<{ name: string; value: string }[]>([]);
   //Get all product query in redux
+
   const {
     data: products,
     isLoading,
     isFetching,
-  } = useGetAllproductQuery([{ name: "page", value: page }], {
+  } = useGetAllproductQuery([...params, { name: "page", value: page }], {
     pollingInterval: 3000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -106,6 +114,28 @@ const ViewProducts = () => {
     {
       title: "Title",
       dataIndex: "name",
+
+      // specify the condition of filtering result
+      // here is that finding the name started with `value`
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      filters: productCategories.map((category) => ({
+        text: category,
+        value: category,
+      })),
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      render: (_, { price }) => {
+        return <span>${price}</span>;
+      },
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
     },
     {
       title: "Action",
@@ -138,22 +168,50 @@ const ViewProducts = () => {
   ];
   const productsDataSource: TTableData[] =
     products?.data.length &&
-    (products?.data as TProduct[]).map(({ _id, image, name }) => ({
-      key: _id,
-      image,
-      name,
-    }));
+    (products?.data as TProduct[]).map(
+      ({ _id, image, name, category, price, quantity }) => ({
+        key: _id,
+        image,
+        name,
+        category,
+        price,
+        quantity,
+      })
+    );
+
+  // ------------------------------
+  // Filter Change Handler
+  // ------------------------------
+  const onChange: TableProps<TTableData>["onChange"] = (
+    _pagination,
+    filters,
+    _sorter,
+    extra
+  ) => {
+    const newParams: { name: string; value: string }[] = [];
+    if (extra?.action === "filter") {
+      setPage(1);
+
+      filters?.category?.forEach((item) => {
+        newParams.push({ name: "category", value: item as string });
+      });
+      setParams(newParams);
+    }
+  };
+  // ------------------------------
+  // Render Component
+  // ------------------------------
   return (
     <div>
       <Table
         style={{ overflowX: "scroll" }}
-        className="custom-table"
         loading={isFetching && isLoading}
         columns={columns}
         dataSource={productsDataSource}
         pagination={false}
+        onChange={onChange}
       />
-      ;
+      ;{/* Pagination Control */}
       <Pagination
         style={{ marginTop: "10px", marginBottom: "10px", color: "red" }}
         align="end"

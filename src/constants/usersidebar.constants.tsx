@@ -11,4 +11,14 @@ export const userPaths: MenuProps["items"] = [
     key: "all-orders",
     label: <NavLink to={"/user/orders"}>All Orders</NavLink>,
   },
+  {
+    key: "setting",
+    label: "Setting",
+    children: [
+      {
+        key: "profile",
+        label: <NavLink to={"/user/profile"}>Profile</NavLink>,
+      },
+    ],
+  },
 ];

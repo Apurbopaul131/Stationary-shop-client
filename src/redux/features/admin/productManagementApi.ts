@@ -14,7 +14,7 @@ const productManageMentApi = baseApi.injectEndpoints({
         return {
           url: "/products",
           method: "GET",
-          params: args[0].name && params,
+          params: args[0]?.name && params,
         };
       },
     }),

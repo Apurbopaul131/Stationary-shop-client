@@ -1,6 +1,7 @@
 import { Input, Select, Tabs, TabsProps, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GetProps } from "react-redux";
+import { useLocation } from "react-router-dom";
 import AllProductsCategory from "../components/ui/AllProductsCategory";
 import { productCategoriesAllProducts } from "../constants/createproduct.constants";
 import { useGetAllproductQuery } from "../redux/features/admin/productManagementApi";
@@ -15,6 +16,7 @@ type TSearchProps = GetProps<typeof Input.Search>;
 
 const { Search } = Input;
 const AllProducts = () => {
+  const location = useLocation();
   const [sort, setSort] = useState("-createdAt");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
@@ -25,6 +27,19 @@ const AllProducts = () => {
     ...params,
   ]);
 
+  useEffect(() => {
+    if (location.state?.selectedCategory) {
+      const selectedCategory = location.state.selectedCategory;
+      setCategory(selectedCategory);
+      setPage(1);
+      const queryItems = [
+        { name: "sort", value: sort },
+        { name: "searchTerm", value: searchTerm },
+        { name: "category", value: selectedCategory },
+      ];
+      setParams(queryItems);
+    }
+  }, [location.state, searchTerm, sort]);
   const productFiterItems: TabsProps["items"] =
     productCategoriesAllProducts.map((category) => ({
       key: category,
@@ -120,7 +135,11 @@ const AllProducts = () => {
         </div>
       </div>
       <Tabs
-        defaultActiveKey="All"
+        defaultActiveKey={
+          location.state?.selectedCategory
+            ? location.state.selectedCategory
+            : category
+        }
         items={productFiterItems}
         onChange={onChange}
         indicator={{ size: (origin) => origin - 20, align: "center" }}

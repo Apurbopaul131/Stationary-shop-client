@@ -49,6 +49,7 @@ export type TProduct = {
   description: string;
   quantity: number;
   inStock: boolean;
+  rating: number;
 };
 export type TStatus = "Pending" | "Shipping";
 type TTransaction = {

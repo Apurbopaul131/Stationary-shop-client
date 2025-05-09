@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form } from "antd";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import {
   FieldValues,
   FormProvider,
@@ -16,6 +16,7 @@ type TPcFormprops = {
   children: ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
   style?: Record<string, unknown>;
+  demoCredintial?: Record<string, unknown>;
 } & TpcFormConfig;
 
 const PcForm = ({
@@ -24,6 +25,7 @@ const PcForm = ({
   defaultValues,
   resolver,
   style,
+  demoCredintial,
 }: TPcFormprops) => {
   const phformConfig: TpcFormConfig = {};
   //handle default value props
@@ -37,6 +39,14 @@ const PcForm = ({
 
   //use reack-hook form
   const methods = useForm(phformConfig);
+
+  // ✅ Only set values in an effect (not during render)
+  useEffect(() => {
+    if (demoCredintial?.email) {
+      methods.setValue("email", demoCredintial.email);
+      methods.setValue("password", demoCredintial.password);
+    }
+  }, [demoCredintial, methods]);
 
   //use an wrapper function is used to submit data and reset the form after submit
   const submit: SubmitHandler<FieldValues> = (data) => {
