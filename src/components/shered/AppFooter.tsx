@@ -1,4 +1,5 @@
 import { Layout, Typography } from "antd";
+import { Link } from "react-router-dom";
 import CompanyLogo from "../../assets/images/shop-logo.png";
 import "./AppFooter.css";
 const { Footer } = Layout;
@@ -21,51 +22,40 @@ const AppFooter = () => {
         </div>
         <div>
           <Title level={5} style={{ fontWeight: "bold" }}>
-            Services
+            Contact
           </Title>
-          <a href="#" className="footer-link">
-            Branding
-          </a>
-          <a href="#" className="footer-link">
-            Design
-          </a>
-          <a href="#" className="footer-link">
-            Marketing
-          </a>
-          <a href="#" className="footer-link">
-            Advertisement
-          </a>
+          <p>+8801917424643</p>
+          <p>Shewrapara,Mirpur</p>
+          <p>apurbopaul131@gmail.com</p>
         </div>
         <div>
           <Title level={5} style={{ fontWeight: "bold" }}>
             Company
           </Title>
-          <a href="#" className="footer-link">
-            About us
-          </a>
-          <a href="#" className="footer-link">
-            Contact
-          </a>
-          <a href="#" className="footer-link">
-            Jobs
-          </a>
-          <a href="#" className="footer-link">
-            Press kit
-          </a>
+
+          <p>
+            <Link to={"/about"}>About</Link>
+          </p>
+
+          <p>
+            <Link to={"/contact"}>Contact</Link>
+          </p>
+          <p>
+            <Link to={"/faq"}>
+              <p>FAQ</p>
+            </Link>
+          </p>
         </div>
         <div>
           <Title level={5} style={{ fontWeight: "bold" }}>
-            Legal
+            Usefull links
           </Title>
-          <a href="#" className="footer-link">
-            Terms of use
-          </a>
-          <a href="#" className="footer-link">
-            Privacy policy
-          </a>
-          <a href="#" className="footer-link">
-            Cookie policy
-          </a>
+          <p>
+            <Link to={"/about"}>Home</Link>
+          </p>
+          <p>
+            <Link to={"/products"}>All products</Link>
+          </p>
         </div>
       </div>
     </Footer>

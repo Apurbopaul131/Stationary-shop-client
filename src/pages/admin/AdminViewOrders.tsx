@@ -237,7 +237,7 @@ const AdminViewOrders = () => {
   return (
     <div>
       <Table
-        style={{ overflowX: "scroll" }}
+        scroll={{ x: "max-content" }}
         loading={isFetching && isLoading}
         columns={columns}
         dataSource={orderDataSource}

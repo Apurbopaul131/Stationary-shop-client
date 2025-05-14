@@ -10,6 +10,7 @@ import {
 import { useGetAllproductQuery } from "../../redux/features/admin/productManagementApi";
 
 const { Title } = Typography;
+
 const AdminDashboard = () => {
   //This redux hook are used for get all order
   const {
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  
+
   return (
     <div>
       <Title
@@ -63,7 +64,7 @@ const AdminDashboard = () => {
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 16 }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <StaticOrderTable
             orders={orders?.data?.slice(0, 5)}
             isLoading={isLoading}
@@ -83,7 +84,7 @@ const AdminDashboard = () => {
             </Link>
           </div>
         </Col>
-        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <DashboardBarChart />
         </Col>
       </Row>

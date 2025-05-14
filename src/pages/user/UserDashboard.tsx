@@ -57,7 +57,7 @@ const UserDashboard = () => {
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 16 }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <StaticOrderTable
             orders={orders?.data?.slice(0, 5)}
             isLoading={isLoading}
@@ -77,7 +77,7 @@ const UserDashboard = () => {
             </Link>
           </div>
         </Col>
-        <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 8 }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <DashboardBarChart />
         </Col>
       </Row>

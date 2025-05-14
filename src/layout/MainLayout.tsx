@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div style={{ width: "90%", margin: "0 auto" }}>
       <Navbar></Navbar>
-      <div style={{}}>
+      <div style={{ minHeight: "100vh" }}>
         <Outlet />
       </div>
       <AppFooter />

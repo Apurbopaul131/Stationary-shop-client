@@ -13,7 +13,13 @@ const VerifyOrder = () => {
   } = useVerifyOrderQuery(searchParams.get("order_id"));
 
   if (isLoading && isFetching) {
-    return <LoadingSpinner />;
+    return (
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}
+      >
+        <LoadingSpinner />
+      </div>
+    );
   }
   return (
     <div>
@@ -74,6 +80,7 @@ const VerifyOrder = () => {
           <br />
           We are working hard to find the best service and deals for you.
         </p>
+
         <Link to={"/products"}>
           <Button color="danger" variant="solid">
             Continue <ArrowRightOutlined />

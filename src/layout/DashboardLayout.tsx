@@ -51,6 +51,8 @@ const DashboardLayout = () => {
             justifyContent: "space-between",
             alignItems: "center",
             cursor: "pointer",
+            paddingLeft: "5px",
+            paddingRight: "5px",
           }}
         >
           <div
@@ -62,7 +64,6 @@ const DashboardLayout = () => {
               gap: "4px",
               justifyContent: "center",
               alignItems: "center",
-              marginLeft: "10px",
             }}
           >
             <img src={paperCartLogo} alt="paperCartLogo" />
@@ -70,7 +71,6 @@ const DashboardLayout = () => {
           </div>
           <Button
             onClick={() => dispatch(logout())}
-            style={{ marginRight: "10px" }}
             color="danger"
             variant="solid"
           >

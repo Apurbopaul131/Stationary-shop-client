@@ -55,6 +55,7 @@ const StaticOrderTable = ({
       columns={columns}
       dataSource={orderDataSource}
       pagination={false}
+      scroll={{ x: "max-content" }}
     />
   );
 };

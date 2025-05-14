@@ -154,7 +154,7 @@ const ShowProfile = ({
               <span style={{ color: "#FF4D4F" }}>Status</span>
             </div>
             <span style={{ color: "#FF4D4F" }}>
-              {userInfo?.isBlocked ? "Active" : "Blocked"}
+              {userInfo?.isBlocked ? "Blocked" : "Active"}
             </span>
           </div>
         </div>
