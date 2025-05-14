@@ -1,14 +1,15 @@
 import { LogoutOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
-import paperCartLogo from "../assets/images/shop-logo.png";
+import { Outlet } from "react-router-dom";
+import DropdwonAvater from "../components/ui/DropdwonAvater";
 import { adminPahts } from "../constants/adminsidebar.constants";
 import { userPaths } from "../constants/usersidebar.constants";
 import { logout, selactUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import "./DashboardLayout.css";
 const { Header, Content, Sider } = Layout;
 const DashboardLayout = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const user = useAppSelector(selactUser);
   const dispatch = useAppDispatch();
 
@@ -48,27 +49,15 @@ const DashboardLayout = () => {
           style={{
             padding: 0,
             display: "flex",
-            justifyContent: "space-between",
+            gap: "12px",
+            justifyContent: "end",
             alignItems: "center",
             cursor: "pointer",
-            paddingLeft: "5px",
-            paddingRight: "5px",
+
+            paddingRight: "10px",
           }}
         >
-          <div
-            onClick={() => navigate("/")}
-            style={{
-              color: "white",
-              height: "4rem",
-              display: "flex",
-              gap: "4px",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img src={paperCartLogo} alt="paperCartLogo" />
-            <h2>PaperCard</h2>
-          </div>
+          <DropdwonAvater role={user?.role as string} />
           <Button
             onClick={() => dispatch(logout())}
             color="danger"
